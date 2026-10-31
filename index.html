@@ -4,9 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عداد الاستغفار </title>
+  <meta name="theme-color" content="#143D2B">
+  <meta name="description" content="مساحة هادئة لذكر الله والاستغفار">
+  <title>عداد الاستغفار | لحظة ذكر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --primary: #143D2B;
+      --primary-dark: #0C2B1D;
+      --accent: #B59A64;
+      --cream: #F8F7F2;
+      --muted: #78867C;
+      --border: #E6EAE2;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -14,79 +29,197 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Tahoma, Arial, sans-serif;
-      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+      font-family: 'Tajawal', sans-serif;
+      background: #F3F5F0;
+      color: var(--primary);
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
-      color: #245b40;
+      padding: 24px;
     }
 
-    .container {
-      background: white;
-      padding: 40px 25px;
-      border-radius: 25px;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
-      text-align: center;
+    .app {
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(20, 61, 43, 0.07);
     }
 
-    h1 {
-      font-size: 28px;
-      margin-bottom: 15px;
+    .header {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 32px 24px 40px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .subtitle {
-      color: #698477;
-      font-size: 15px;
-      line-height: 1.8;
+    .header::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      top: -120px;
+      right: -60px;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      bottom: -110px;
+      left: -45px;
+    }
+
+    .brand {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: #D5C7A4;
+      margin-bottom: 14px;
+    }
+
+    .header h1 {
+      font-family: 'Amiri', serif;
+      font-size: 35px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #D0DED4;
+      margin: 10px 0 0;
+    }
+
+    .content {
+      padding: 32px 30px 26px;
+      text-align: center;
+    }
+
+    .label {
+      display: inline-block;
+      background: #EFF4EE;
+      color: #52715B;
+      padding: 9px 17px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .dhikr {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 30px 0;
-      line-height: 1.8;
+      font-family: 'Amiri', serif;
+      font-size: 29px;
+      line-height: 1.9;
+      margin: 22px 0 12px;
+      color: var(--primary);
     }
 
-    .counter {
-      width: 190px;
-      height: 190px;
-      margin: 25px auto;
+    .divider {
+      width: 35px;
+      height: 2px;
+      background: var(--accent);
+      margin: 0 auto;
+      border-radius: 5px;
+    }
+
+    .counter-area {
+      margin: 26px auto 24px;
+      width: 214px;
+      height: 214px;
+      position: relative;
+    }
+
+    .progress-ring {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: #E8EEE8;
+      stroke-width: 7;
+    }
+
+    .ring-progress {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 603.19;
+      stroke-dashoffset: 603.19;
+      transition: stroke-dashoffset 0.4s ease;
+    }
+
+    .counter-inner {
+      position: absolute;
+      inset: 17px;
       border-radius: 50%;
-      border: 8px solid #a5d6a7;
+      background: var(--cream);
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      background: #f1f8f2;
+      align-items: center;
+    }
+
+    .counter-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 5px;
     }
 
     #count {
-      font-size: 65px;
-      font-weight: bold;
-      color: #2e7d32;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 63px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
     }
 
-    button {
-      border: none;
-      cursor: pointer;
-      border-radius: 15px;
-      font-size: 18px;
-      transition: 0.2s;
+    .counter-caption {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 7px;
+    }
+
+    .count-pop {
+      animation: pop 0.2s ease;
+    }
+
+    @keyframes pop {
+      50% { transform: scale(1.12); }
+      100% { transform: scale(1); }
     }
 
     .add-btn {
-      background: #388e3c;
-      color: white;
-      width: 100%;
-      padding: 18px;
-      font-weight: bold;
+      display: block;
+      width: 68%;
+      margin: 0 auto;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 13px;
+      padding: 14px 18px;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
     }
 
     .add-btn:hover {
-      background: #2e7d32;
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 7px 18px rgba(20,61,43,0.15);
     }
 
     .add-btn:active {
@@ -94,104 +227,252 @@
     }
 
     .reset-btn {
-      margin-top: 15px;
-      background: #edf5ee;
-      color: #388e3c;
-      padding: 12px 25px;
+      display: block;
+      margin: 15px auto 0;
+      padding: 9px 15px;
+      border: none;
+      background: transparent;
+      color: #7B8B80;
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 8px;
     }
 
-    .progress {
-      background: #e8f5e9;
-      height: 12px;
+    .reset-btn:hover {
+      background: #F0F4EF;
+      color: var(--primary);
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .goal-box {
+      margin-top: 25px;
+      padding: 17px 18px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: #FAFBF8;
+    }
+
+    .goal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    #goalText {
+      color: #6C8473;
+      font-size: 12px;
+    }
+
+    .progress-track {
+      height: 7px;
+      background: #E4ECE4;
       border-radius: 20px;
       overflow: hidden;
-      margin-top: 20px;
     }
 
     #progressBar {
       width: 0%;
       height: 100%;
-      background: #66bb6a;
-      transition: width 0.3s;
-    }
-
-    .goal {
-      margin-top: 12px;
-      color: #698477;
-      font-size: 14px;
+      background: var(--primary);
+      border-radius: 20px;
+      transition: width 0.4s ease;
     }
 
     .footer {
-      margin-top: 30px;
-      font-size: 13px;
-      color: #8aa596;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding: 20px;
+      background: #FCFCFA;
+    }
+
+    .footer p {
+      font-family: 'Amiri', serif;
+      color: #738778;
+      font-size: 17px;
+      margin: 0;
+    }
+
+    .footer small {
+      display: block;
+      font-size: 11px;
+      color: #A4ADA4;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .app {
+        border-radius: 23px;
+      }
+
+      .header {
+        padding: 28px 20px 34px;
+      }
+
+      .content {
+        padding: 27px 20px 24px;
+      }
+
+      .dhikr {
+        font-size: 26px;
+      }
+
+      .add-btn {
+        width: 72%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <main class="app">
 
-    <h1>🌿 عداد الاستغفار</h1>
+    <header class="header">
+      <div class="brand">✦ لحظة ذكر ✦</div>
+      <h1>عداد الاستغفار</h1>
+      <p>مساحة هادئة لذكر الله</p>
+    </header>
 
-    
+    <section class="content">
 
-    <div class="dhikr">
-      أستغفر الله العظيم وأتوب إليه
-    </div>
+      <span class="label">ذِكرٌ يطمئن به القلب</span>
 
-    <div class="counter">
-      <span id="count">0</span>
-    </div>
+      <div class="dhikr">
+        أستغفر الله العظيم وأتوب إليه
+      </div>
 
-    <button class="add-btn" onclick="addCount()">
-      أستغفر الله 
-    </button>
+      <div class="divider"></div>
 
-    <button class="reset-btn" onclick="resetCount()">
-      إعادة العداد ↺
-    </button>
+      <div class="counter-area">
 
-    <div class="progress">
-      <div id="progressBar"></div>
-    </div>
+        <svg class="progress-ring" viewBox="0 0 214 214"
+             aria-hidden="true">
+          <circle class="ring-bg"
+                  cx="107" cy="107" r="96"></circle>
 
-    <p class="goal" id="goalText">
-      0 من 100 استغفار
-    </p>
+          <circle class="ring-progress"
+                  id="ringProgress"
+                  cx="107" cy="107" r="96"></circle>
+        </svg>
 
-    
+        <div class="counter-inner">
+          <span class="counter-label">عدد الاستغفارات</span>
+          <span id="count" aria-live="off">0</span>
+          <span class="counter-caption">استغفار</span>
+        </div>
 
-  </div>
+      </div>
+
+      <button class="add-btn" id="addButton"
+              onclick="addCount()">
+        أستغفر الله
+      </button>
+
+      <button class="reset-btn" onclick="resetCount()">
+        ↺ إعادة العداد
+      </button>
+
+      <div class="goal-box">
+        <div class="goal-header">
+          <span>هدفك اليومي</span>
+          <span id="goalText">0 من 100</span>
+        </div>
+
+        <div class="progress-track"
+             role="progressbar"
+             aria-label="التقدم نحو هدف الاستغفار"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"
+             id="progressTrack">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="footer">
+      <p>﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾</p>
+      <small>صُنع بمحبة لنشر الذكر</small>
+    </footer>
+
+  </main>
 
   <script>
     const goal = 100;
+    const circumference = 2 * Math.PI * 96;
 
-    let count = Number(
+    const countElement = document.getElementById("count");
+    const progressBar = document.getElementById("progressBar");
+    const ringProgress = document.getElementById("ringProgress");
+    const goalText = document.getElementById("goalText");
+    const progressTrack = document.getElementById("progressTrack");
+
+    const savedCount = Number(
       localStorage.getItem("istighfarCount")
-    ) || 0;
+    );
+
+    let count = Number.isFinite(savedCount) && savedCount >= 0
+      ? Math.floor(savedCount)
+      : 0;
+
+    ringProgress.style.strokeDasharray = circumference;
 
     function updateUI() {
-      document.getElementById("count").textContent = count;
+      countElement.textContent = count.toLocaleString("ar-SA");
 
-      document.getElementById("goalText").textContent =
-        count + " من " + goal + " استغفار";
+      const progress = Math.min((count / goal) * 100, 100);
 
-      let progress = Math.min((count / goal) * 100, 100);
+      progressBar.style.width = progress + "%";
 
-      document.getElementById("progressBar").style.width =
-        progress + "%";
+      ringProgress.style.strokeDashoffset =
+        circumference * (1 - progress / 100);
+
+      goalText.textContent =
+        count.toLocaleString("ar-SA") +
+        " من " +
+        goal.toLocaleString("ar-SA");
+
+      progressTrack.setAttribute(
+        "aria-valuenow",
+        progress
+      );
     }
 
     function addCount() {
       count++;
+
       localStorage.setItem("istighfarCount", count);
+
       updateUI();
+
+      countElement.classList.remove("count-pop");
+      void countElement.offsetWidth;
+      countElement.classList.add("count-pop");
     }
 
     function resetCount() {
-      if (confirm("هل تريد تصفير العداد؟")) {
+      if (confirm("هل تريد إعادة العداد إلى الصفر؟")) {
         count = 0;
         localStorage.setItem("istighfarCount", count);
         updateUI();
